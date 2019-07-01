@@ -37,6 +37,6 @@ Route::get('/facebook-link', function () {
     return redirect()->to('https://cashkumar.com/application/signup?utm_campaign=facebook_link&utm_source=fb&utm_medium=conversion', 301);
 });
 
-Route::get('/furnome-link', function() {
+Route::get('/furnome', function() {
 	return redirect()->to('https://cashkumar.com/application/signup?utm_campaign=furnome010719&utm_source=web&utm_medium=conversion', 301);
 });
