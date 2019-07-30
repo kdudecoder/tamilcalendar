@@ -40,3 +40,8 @@ Route::get('/facebook-link', function () {
 Route::get('/furnome', function() {
 	return redirect()->to('https://cashkumar.com/application/signup?utm_campaign=furnome010719&utm_source=web&utm_medium=conversion', 301);
 });
+
+Route::get('/ck-borrower', function() {
+	return redirect()->to('https://cashkumar.com/application/signup?utm_campaign=LR12881&utm_source=cashkumar&utm_medium=conversion', 301);
+
+});
