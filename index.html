@@ -1,0 +1,195 @@
+
+<!doctype>
+<html>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<script src="panchangam.js"></script>
+	<style>
+		.block{
+			overflow:hidden;
+		}
+
+		.trow {
+			display: table-row;
+		}
+		.alignL {
+			text: bold;
+		}
+		.alignL, .alignR {
+			display: table-cell;
+			padding-right: 25px;
+		}
+		.alignR {
+			margin: 1px 1px;
+		}
+
+	</style>
+	<link rel="stylesheet" type="text/css" href="./build/main.css">
+</head>
+<body>
+	<div class="flex items-center justify-center bg-gray-100">
+		<div class="max-w-md w-full min-h-screen border border-gray-300 py-8">
+			<div class="text-center">
+				<p class="text-5xl sm:text-6xl font-black">
+					<span id="today"></span>
+				</p>
+			</div>
+			<div class="text-center mb-4">
+				<p id="MyClockDisplay" class="text-blue-600 text-xl" onload="showTime()"></p>
+			</div>
+			<div class="flex items-center justify-center">
+				<div class="text-xl">
+					<div class="trow">
+						<!-- <div class="alignL text-gray-700">நாள்: </div><div id='day' class="alignR text-gray-900"></div> -->
+					</div>
+					<div class="trow">
+						<!-- <div class="alignL text-gray-700">திதி: </div><div id=tithi class="alignR"></div> -->
+					</div>
+					<div class="trow">
+						<!-- <div class="alignL text-gray-700">நட்சத்திரம்: </div><div id=nakshtra class="alignR"></div> -->
+					</div>
+					<div class="trow">
+						<!-- <div class="alignL text-gray-700">கர்ணம்: </div><div id=karna class="alignR"></div> -->
+					</div>
+					<div class="trow">
+						<!-- <div class="alignL text-gray-700">யோகம்: </div><div id=yoga class="alignR"></div> -->
+					</div>
+					<div class="trow">
+						<!-- <div class="alignL text-gray-700">ராசி: </div><div id=raasi class="alignR"></div> -->
+					</div>
+
+				</div>
+			</div>
+			<!-- component -->
+			<div class="overflow-hidden min-h-64 text-xl">
+
+				<div class="py-5 px-3 bg-white">
+					<div class="flex justify-between px-2 py-2">
+						<div class="flex text-gray-700">
+							<span class="text-gray-700">நாள்: </span>
+						</div>
+						<div class="text-gray-500 font-thin">
+							<div id='day' class="text-gray-900"></div>
+						</div>
+					</div>
+					<div class="flex justify-between px-2 py-2">
+						<div class="flex text-gray-700">
+							<span class="text-gray-700">திதி: </span>
+						</div>
+						<div class="text-gray-500 font-thin">
+							<div id='tithi' class="text-gray-900"></div>
+						</div>
+					</div>
+					<div class="flex justify-between px-2 py-2">
+						<div class="flex text-gray-700">
+							<span class="text-gray-700">நட்சத்திரம்: </span>
+						</div>
+						<div class="text-gray-500 font-thin">
+							<div id='nakshtra' class="text-gray-900"></div>
+						</div>
+					</div>
+					<div class="flex justify-between px-2 py-2">
+						<div class="flex text-gray-700">
+							<span class="text-gray-700">கர்ணம்: </span>
+						</div>
+						<div class="text-gray-500 font-thin">
+							<div id='karna' class="text-gray-900"></div>
+						</div>
+					</div>
+					<div class="flex justify-between px-2 py-2">
+						<div class="flex text-gray-700">
+							<span class="text-gray-700">யோகம்: </span>
+						</div>
+						<div class="text-gray-500 font-thin">
+							<div id='yoga' class="text-gray-900"></div>
+						</div>
+					</div>
+					<div class="flex justify-between px-2 py-2">
+						<div class="flex text-gray-700">
+							<span class="text-gray-700">ராசி: </span>
+						</div>
+						<div class="text-gray-500 font-thin">
+							<div id='raasi' class="text-gray-900"></div>
+						</div>
+					</div>
+				</div>
+				<div class="mt-8 flex items-center justify-between px-5 bg-transparent">
+					<button onclick="dateBackward()" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-2 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+						Previous Date
+					</button>
+					<button onclick="dateForward()" class="ml-2 inline-flex justify-center w-full rounded-md border border-gray-300 px-2 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+						Next Date
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		t = new Date();
+		calculatePanchangam();
+
+		function calculatePanchangam() {
+    //t.setDate(t.getDate() - 1);
+    t = panchang.calculate(t, function() {
+    	document.getElementById("day").innerHTML=panchang.Day.name;
+    	document.getElementById("tithi").innerHTML=panchang.Tithi.name;
+    	document.getElementById("nakshtra").innerHTML=panchang.Nakshatra.name;
+    	document.getElementById("karna").innerHTML=panchang.Karna.name;
+    	document.getElementById("yoga").innerHTML=panchang.Yoga.name;
+    	document.getElementById("raasi").innerHTML=panchang.Raasi.name;
+    });
+    dateInWords(t);
+}
+
+function dateForward() {
+	t.setDate(t.getDate() + 1);
+	calculatePanchangam();
+}
+
+function dateBackward() {
+	t.setDate(t.getDate() - 1);
+	calculatePanchangam();
+}
+
+function dateInWords(t) {   
+	var dd = String(t.getDate()).padStart(2, '0');
+    var mm = String(t.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = t.getFullYear();
+    today = dd + '-' + mm + '-' + yyyy;
+    document.getElementById("today").innerHTML = today;
+}
+
+function showTime(){
+	var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+    	h = 12;
+    }
+    
+    if(h > 12){
+    	h = h - 12;
+    	session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
+}
+
+showTime();
+
+</script>
+</body>
+</html>

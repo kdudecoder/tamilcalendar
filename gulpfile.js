@@ -1,16 +1,21 @@
-var elixir = require('laravel-elixir');
+function defaultTask(cb) {
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
- */
+		const postcss = require('gulp-postcss')
+		const gulp = require('gulp')
 
-elixir(function(mix) {
-    mix.sass('app.scss');
-});
+		return gulp.src('css/main.css')
+    // ...
+    .pipe(postcss([
+      // ...
+      require('tailwindcss'),
+      require('autoprefixer'),
+      // ...
+      ]))
+    // ...
+    .pipe(gulp.dest('build/'))
+
+
+	cb();
+}
+
+exports.default = defaultTask
