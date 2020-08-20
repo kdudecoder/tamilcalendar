@@ -4,7 +4,9 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
-	<script src="panchangam.js"></script>
+	<script src="panchangam.js"></script>	
+	<link rel="stylesheet" type="text/css" href="./build/main.css">
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@500&display=swap" rel="stylesheet"> 
 	<style>
 		.block{
 			overflow:hidden;
@@ -24,8 +26,11 @@
 			margin: 1px 1px;
 		}
 
+		.tamil-font {
+			font-family: 'Baloo Thambi 2', cursive;
+		}
+
 	</style>
-	<link rel="stylesheet" type="text/css" href="./build/main.css">
 </head>
 <body>
 	<div class="flex items-center justify-center bg-gray-100">
@@ -38,33 +43,10 @@
 			<div class="text-center mb-4">
 				<p id="MyClockDisplay" class="text-blue-600 text-xl" onload="showTime()"></p>
 			</div>
-			<div class="flex items-center justify-center">
-				<div class="text-xl">
-					<div class="trow">
-						<!-- <div class="alignL text-gray-700">நாள்: </div><div id='day' class="alignR text-gray-900"></div> -->
-					</div>
-					<div class="trow">
-						<!-- <div class="alignL text-gray-700">திதி: </div><div id=tithi class="alignR"></div> -->
-					</div>
-					<div class="trow">
-						<!-- <div class="alignL text-gray-700">நட்சத்திரம்: </div><div id=nakshtra class="alignR"></div> -->
-					</div>
-					<div class="trow">
-						<!-- <div class="alignL text-gray-700">கர்ணம்: </div><div id=karna class="alignR"></div> -->
-					</div>
-					<div class="trow">
-						<!-- <div class="alignL text-gray-700">யோகம்: </div><div id=yoga class="alignR"></div> -->
-					</div>
-					<div class="trow">
-						<!-- <div class="alignL text-gray-700">ராசி: </div><div id=raasi class="alignR"></div> -->
-					</div>
-
-				</div>
-			</div>
 			<!-- component -->
 			<div class="overflow-hidden min-h-64 text-xl">
 
-				<div class="py-5 px-3 bg-white">
+				<div class="py-5 px-3 bg-white tamil-font">
 					<div class="flex justify-between px-2 py-2">
 						<div class="flex text-gray-700">
 							<span class="text-gray-700">நாள்: </span>
